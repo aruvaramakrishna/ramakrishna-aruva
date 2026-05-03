@@ -9,23 +9,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:          #f8f7f4;
-    --bg2:         #f0ede8;
-    --white:       #ffffff;
-    --navy:        #0f2044;
-    --navy2:       #1a3460;
-    --accent:      #1d5fc4;
-    --accent2:     #2e7de8;
-    --gold:        #c8922a;
-    --text:        #1a1a2e;
-    --muted:       #6b7280;
-    --light:       #9ca3af;
-    --border:      #e2ddd6;
-    --border2:     #d1ccc4;
-    --card:        #ffffff;
-    --tag-bg:      #eef3fc;
-    --tag-color:   #1d5fc4;
-    --tag-border:  #c7d9f5;
+    --bg-hero-start: #f8f7f4;
+    --bg-hero-end:   #f0ede7;
+    --bg:            #f8f7f4;
+    --bg2:           #f0ede8;
+    --white:         #ffffff;
+    --navy:          #0f2044;
+    --navy2:         #1a3460;
+    --accent:        #1d5fc4;
+    --accent2:       #2e7de8;
+    --gold:          #c8922a;
+    --text:          #1a1a2e;
+    --muted:         #6b7280;
+    --light:         #9ca3af;
+    --border:        #e2ddd6;
+    --border2:       #d1ccc4;
+    --tag-bg:        #eef3fc;
+    --tag-color:     #1d5fc4;
+    --tag-border:    #c7d9f5;
   }
 
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -63,11 +64,7 @@
 
   .nav-logo span { color: var(--accent); }
 
-  .nav-links {
-    display: flex;
-    gap: 2.2rem;
-    list-style: none;
-  }
+  .nav-links { display: flex; gap: 2.2rem; list-style: none; }
 
   .nav-links a {
     font-size: 0.8rem;
@@ -81,7 +78,35 @@
 
   .nav-links a:hover { color: var(--accent); }
 
-  /* ── HERO ── */
+  /* ── HERO with gradient ── */
+  .hero-wrapper {
+    background: linear-gradient(160deg, var(--bg-hero-start) 0%, var(--bg-hero-end) 60%, #ebe6df 100%);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* very subtle geometric accent — fintech feel */
+  .hero-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 520px; height: 520px;
+    border-radius: 50%;
+    border: 1px solid rgba(29,95,196,0.08);
+    pointer-events: none;
+  }
+
+  .hero-wrapper::after {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    border: 1px solid rgba(29,95,196,0.06);
+    pointer-events: none;
+  }
+
   .hero {
     min-height: 100vh;
     display: flex;
@@ -91,16 +116,7 @@
     max-width: 1100px;
     margin: 0 auto;
     position: relative;
-  }
-
-  .hero::after {
-    content:'';
-    position: absolute;
-    top: 15%; right: -4%;
-    width: 500px; height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(29,95,196,0.06) 0%, transparent 70%);
-    pointer-events: none;
+    z-index: 1;
   }
 
   .hero-eyebrow {
@@ -217,7 +233,8 @@
     margin-top: 4.5rem;
     border: 1.5px solid var(--border);
     border-radius: 12px;
-    background: var(--white);
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(8px);
     overflow: hidden;
     max-width: 520px;
     box-shadow: 0 2px 16px rgba(15,32,68,0.06);
@@ -266,7 +283,6 @@
     border-top: 1px solid var(--border);
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 3rem;
   }
 
   .section-eyebrow {
@@ -555,7 +571,7 @@
     top: -40%; left: 50%;
     transform: translateX(-50%);
     width: 700px; height: 400px;
-    background: radial-gradient(ellipse, rgba(29,95,196,0.35) 0%, transparent 70%);
+    background: radial-gradient(ellipse, rgba(29,95,196,0.3) 0%, transparent 70%);
     pointer-events: none;
   }
 
@@ -675,33 +691,35 @@
 </nav>
 
 <!-- HERO -->
-<div class="hero">
-  <div class="hero-eyebrow">
-    <div class="eyebrow-line"></div>
-    <span class="eyebrow-text">Lead DevOps & Platform Engineer · 12+ Years</span>
-  </div>
-  <h1>Ramakrishna<br><em>Aruva</em></h1>
-  <div class="hero-role">
-    <strong>Multi-Cloud · Kubernetes · AI/ML Infrastructure</strong> · Azure · AWS · GCP
-  </div>
-  <p class="hero-desc">
-    I build the platforms that other engineers build on. Designing enterprise cloud infrastructure, Kubernetes-native delivery systems, and GPU-enabled AI platforms that scale across global organisations.
-  </p>
-  <div class="hero-ctas">
-    <a href="https://linkedin.com/in/ramakrishna-aruva" target="_blank" class="btn-primary">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-      Connect on LinkedIn
-    </a>
-    <a href="mailto:aruvaramakrishna@gmail.com" class="btn-secondary">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
-      Get In Touch
-    </a>
-  </div>
-  <div class="hero-stats">
-    <div class="stat"><span class="stat-num">12+</span><span class="stat-label">Years</span></div>
-    <div class="stat"><span class="stat-num">3</span><span class="stat-label">Clouds</span></div>
-    <div class="stat"><span class="stat-num">9</span><span class="stat-label">Certifications</span></div>
-    <div class="stat"><span class="stat-num">99.9%</span><span class="stat-label">Uptime</span></div>
+<div class="hero-wrapper">
+  <div class="hero">
+    <div class="hero-eyebrow">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">Lead DevOps & Platform Engineer · 12+ Years</span>
+    </div>
+    <h1>Ramakrishna<br><em>Aruva</em></h1>
+    <div class="hero-role">
+      <strong>Multi-Cloud · Kubernetes · AI/ML Infrastructure</strong> · Azure · AWS · GCP
+    </div>
+    <p class="hero-desc">
+      I build the platforms that other engineers build on. Designing enterprise cloud infrastructure, Kubernetes-native delivery systems, and GPU-enabled AI platforms that scale across global organisations.
+    </p>
+    <div class="hero-ctas">
+      <a href="https://linkedin.com/in/ramakrishna-aruva" target="_blank" class="btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        Connect on LinkedIn
+      </a>
+      <a href="mailto:aruvaramakrishna@gmail.com" class="btn-secondary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        Get In Touch
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">12+</span><span class="stat-label">Years</span></div>
+      <div class="stat"><span class="stat-num">3</span><span class="stat-label">Clouds</span></div>
+      <div class="stat"><span class="stat-num">9</span><span class="stat-label">Certifications</span></div>
+      <div class="stat"><span class="stat-num">99.9%</span><span class="stat-label">Uptime</span></div>
+    </div>
   </div>
 </div>
 
