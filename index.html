@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ramakrishna Aruva — Lead DevOps & Platform Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:          #f8f7f4;
+    --bg2:         #f0ede8;
+    --white:       #ffffff;
+    --navy:        #0f2044;
+    --navy2:       #1a3460;
+    --accent:      #1d5fc4;
+    --accent2:     #2e7de8;
+    --gold:        #c8922a;
+    --text:        #1a1a2e;
+    --muted:       #6b7280;
+    --light:       #9ca3af;
+    --border:      #e2ddd6;
+    --border2:     #d1ccc4;
+    --card:        #ffffff;
+    --tag-bg:      #eef3fc;
+    --tag-color:   #1d5fc4;
+    --tag-border:  #c7d9f5;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.1rem 3rem;
+    background: rgba(248,247,244,0.93);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--navy);
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 9rem 3rem 5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero::after {
+    content:'';
+    position: absolute;
+    top: 15%; right: -4%;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(29,95,196,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.1s;
+  }
+
+  .eyebrow-line {
+    width: 36px; height: 2px;
+    background: var(--accent);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .eyebrow-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.74rem;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: clamp(3.2rem, 7vw, 5.8rem);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--navy);
+    margin-bottom: 0.4rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.2s;
+  }
+
+  .hero h1 em { font-style: normal; color: var(--accent); }
+
+  .hero-role {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 400;
+    color: var(--muted);
+    margin: 0.6rem 0 2rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.35s;
+  }
+
+  .hero-role strong { color: var(--navy2); font-weight: 600; }
+
+  .hero-desc {
+    max-width: 580px;
+    color: var(--muted);
+    font-size: 1.05rem;
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+    line-height: 1.75;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.5s;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.65s;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--navy);
+    color: #fff;
+    font-size: 0.88rem;
+    font-weight: 500;
+    padding: 0.85rem 1.8rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(29,95,196,0.22);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: var(--navy);
+    font-size: 0.88rem;
+    font-weight: 500;
+    padding: 0.85rem 1.8rem;
+    border-radius: 6px;
+    text-decoration: none;
+    border: 1.5px solid var(--border2);
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .hero-stats {
+    display: flex;
+    margin-top: 4.5rem;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    background: var(--white);
+    overflow: hidden;
+    max-width: 520px;
+    box-shadow: 0 2px 16px rgba(15,32,68,0.06);
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.8s;
+  }
+
+  .stat {
+    flex: 1;
+    padding: 1.2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+
+  .stat:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--light);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+
+  /* ── SHARED SECTION ── */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 3rem;
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+
+  .section-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-eyebrow .eyebrow-line { width: 24px; }
+
+  .section-eyebrow-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.9rem, 4vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--navy);
+    margin-bottom: 3rem;
+    line-height: 1.15;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+    font-weight: 300;
+    line-height: 1.8;
+    font-size: 1.02rem;
+  }
+
+  .about-text p strong { color: var(--navy); font-weight: 600; }
+
+  .about-cards { display: flex; flex-direction: column; gap: 0.85rem; }
+
+  .about-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.2s;
+    box-shadow: 0 1px 4px rgba(15,32,68,0.04);
+  }
+
+  .about-card:hover {
+    border-color: var(--accent);
+    transform: translateX(4px);
+    box-shadow: 0 4px 16px rgba(29,95,196,0.1);
+  }
+
+  .about-card-icon { font-size: 1.25rem; flex-shrink: 0; }
+
+  .about-card-text {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--navy);
+    line-height: 1.4;
+  }
+
+  .about-card-text span {
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-weight: 300;
+    display: block;
+    margin-top: 0.1rem;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .skill-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 1.4rem 1.5rem;
+    transition: all 0.2s;
+    box-shadow: 0 1px 4px rgba(15,32,68,0.04);
+  }
+
+  .skill-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 6px 24px rgba(29,95,196,0.1);
+    transform: translateY(-3px);
+  }
+
+  .skill-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skill-icon {
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    background: var(--tag-bg);
+    border: 1px solid var(--tag-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+  }
+
+  .skill-card-title {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.67rem;
+    color: var(--tag-color);
+    background: var(--tag-bg);
+    border: 1px solid var(--tag-border);
+    border-radius: 4px;
+    padding: 0.2rem 0.55rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── EXPERIENCE ── */
+  .timeline { position: relative; padding-left: 1.5rem; }
+
+  .timeline::before {
+    content:'';
+    position: absolute;
+    left: 0; top: 10px; bottom: 10px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--navy) 0%, var(--border) 100%);
+    border-radius: 2px;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+    padding-left: 2.5rem;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -2.05rem; top: 1.1rem;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--navy);
+    border: 3px solid var(--bg);
+    box-shadow: 0 0 0 2px var(--navy);
+  }
+
+  .timeline-dot.muted {
+    background: var(--border2);
+    box-shadow: 0 0 0 2px var(--border2);
+  }
+
+  .timeline-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 1.8rem;
+    transition: all 0.2s;
+    box-shadow: 0 1px 4px rgba(15,32,68,0.04);
+  }
+
+  .timeline-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 6px 24px rgba(29,95,196,0.09);
+  }
+
+  .timeline-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.3rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .timeline-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .timeline-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--light);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  .timeline-company {
+    font-size: 0.86rem;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+  }
+
+  .timeline-desc {
+    color: var(--muted);
+    font-size: 0.92rem;
+    font-weight: 300;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+
+  /* ── CERTS ── */
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 1rem;
+  }
+
+  .cert-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1.1rem 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.2s;
+    box-shadow: 0 1px 4px rgba(15,32,68,0.04);
+  }
+
+  .cert-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(200,146,42,0.1);
+  }
+
+  .cert-badge { font-size: 1.25rem; flex-shrink: 0; }
+
+  .cert-name {
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.35;
+  }
+
+  .cert-id {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.67rem;
+    color: var(--gold);
+    margin-top: 0.2rem;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: var(--navy);
+    padding: 6rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-section::before {
+    content:'';
+    position: absolute;
+    top: -40%; left: 50%;
+    transform: translateX(-50%);
+    width: 700px; height: 400px;
+    background: radial-gradient(ellipse, rgba(29,95,196,0.35) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .contact-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .contact-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+
+  .contact-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+
+  .contact-subtitle {
+    color: rgba(255,255,255,0.45);
+    font-weight: 300;
+    margin-bottom: 3rem;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    padding: 0.8rem 1.4rem;
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 8px;
+    transition: all 0.2s;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .contact-link:hover {
+    color: #fff;
+    border-color: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-2px);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 1.8rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--light);
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible { opacity:1; transform:translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .contact-section { padding: 4rem 1.5rem; }
+    .timeline-top { flex-direction: column; }
+    .hero-stats { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Ramakrishna <span>Aruva</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">
+    <div class="eyebrow-line"></div>
+    <span class="eyebrow-text">Lead DevOps & Platform Engineer · 12+ Years</span>
+  </div>
+  <h1>Ramakrishna<br><em>Aruva</em></h1>
+  <div class="hero-role">
+    <strong>Multi-Cloud · Kubernetes · AI/ML Infrastructure</strong> · Azure · AWS · GCP
+  </div>
+  <p class="hero-desc">
+    I build the platforms that other engineers build on. Designing enterprise cloud infrastructure, Kubernetes-native delivery systems, and GPU-enabled AI platforms that scale across global organisations.
+  </p>
+  <div class="hero-ctas">
+    <a href="https://linkedin.com/in/ramakrishna-aruva" target="_blank" class="btn-primary">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+      Connect on LinkedIn
+    </a>
+    <a href="mailto:aruvaramakrishna@gmail.com" class="btn-secondary">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+      Get In Touch
+    </a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">12+</span><span class="stat-label">Years</span></div>
+    <div class="stat"><span class="stat-num">3</span><span class="stat-label">Clouds</span></div>
+    <div class="stat"><span class="stat-num">9</span><span class="stat-label">Certifications</span></div>
+    <div class="stat"><span class="stat-num">99.9%</span><span class="stat-label">Uptime</span></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-eyebrow fade-in">
+    <div class="eyebrow-line"></div>
+    <span class="section-eyebrow-text">01 · About</span>
+  </div>
+  <div class="section-title fade-in">More than infrastructure.<br>A platform mindset.</div>
+  <div class="about-grid">
+    <div class="about-text fade-in">
+      <p>With over <strong>12 years across Azure, AWS, and GCP</strong>, I specialise in turning complex cloud infrastructure into reliable, self-service platforms that let engineering teams move fast without breaking things.</p>
+      <p>My work spans <strong>Platform Engineering, SRE, and AI/ML Infrastructure</strong> — designing Kubernetes-native delivery systems, GitOps pipelines, IaC blueprints, and DevSecOps frameworks that scale across enterprise environments.</p>
+      <p>Most recently I have been building <strong>GPU-enabled AI infrastructure</strong> and RAG-based platforms at S&P Global, bringing Generative AI from proof-of-concept into production. I combine platform engineering product thinking with hands-on technical depth and a delivery-focused leadership style.</p>
+      <p>Based in <strong>Hyderabad, India</strong>. Open to relocation across the Middle East — UAE, KSA, Qatar.</p>
+    </div>
+    <div class="about-cards fade-in">
+      <div class="about-card"><div class="about-card-icon">☁️</div><div class="about-card-text">Multi-Cloud Architecture<span>Azure (primary) · AWS · GCP</span></div></div>
+      <div class="about-card"><div class="about-card-icon">⎈</div><div class="about-card-text">Kubernetes Platform Engineering<span>AKS · EKS · GKE · Istio · KEDA</span></div></div>
+      <div class="about-card"><div class="about-card-icon">🤖</div><div class="about-card-text">AI/ML Infrastructure<span>GPU Clusters · RAG Pipelines · Agentic AI</span></div></div>
+      <div class="about-card"><div class="about-card-icon">🔒</div><div class="about-card-text">DevSecOps & SRE<span>OPA · Trivy · SLOs · OpenTelemetry</span></div></div>
+      <div class="about-card"><div class="about-card-icon">♾️</div><div class="about-card-text">GitOps & CI/CD<span>ArgoCD · Flux CD · GitHub Actions</span></div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-eyebrow fade-in">
+    <div class="eyebrow-line"></div>
+    <span class="section-eyebrow-text">02 · Skills</span>
+  </div>
+  <div class="section-title fade-in">The full stack<br>of cloud engineering.</div>
+  <div class="skills-grid">
+    <div class="skill-card fade-in">
+      <div class="skill-card-header"><div class="skill-icon">☁️</div><div class="skill-card-title">Cloud Platforms</div></div>
+      <div class="skill-tags"><span class="tag">Azure</span><span class="tag">AWS</span><span class="tag">GCP</span><span class="tag">Landing Zones</span><span class="tag">CAF/WAF</span><span class="tag">Hub-Spoke</span></div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-header"><div class="skill-icon">⎈</div><div class="skill-card-title">Kubernetes & Containers</div></div>
+      <div class="skill-tags"><span class="tag">AKS</span><span class="tag">EKS</span><span class="tag">GKE</span><span class="tag">Helm</span><span class="tag">Kustomize</span><span class="tag">Istio</span><span class="tag">KEDA</span><span class="tag">Cluster API</span></div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-header"><div class="skill-icon">♾️</div><div class="skill-card-title">GitOps & CI/CD</div></div>
+      <div class="skill-tags"><span class="tag">ArgoCD</span><span class="tag">Flux CD</span><span class="tag">GitHub Actions</span><span class="tag">Azure DevOps</span><span class="tag">GitLab CI</span><span class="tag">Jenkins</span></div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-header"><div class="skill-icon">📦</div><div class="skill-card-title">IaC & Automation</div></div>
+      <div class="skill-tags"><span class="tag">Terraform</span><span class="tag">Bicep</span><span class="tag">ARM</span><span class="tag">CloudFormation</span><span class="tag">Ansible</span><span class="tag">Pulumi</span></div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-header"><div class="skill-icon">🤖</div><div class="skill-card-title">AI/ML Infrastructure</div></div>
+      <div class="skill-tags"><span class="tag">GPU Kubernetes</span><span class="tag">RAG Pipelines</span><span class="tag">Azure OpenAI</span><span class="tag">AWS Bedrock</span><span class="tag">Vertex AI</span><span class="tag">Vector DBs</span></div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-header"><div class="skill-icon">📊</div><div class="skill-card-title">Observability & SRE</div></div>
+      <div class="skill-tags"><span class="tag">OpenTelemetry</span><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">Datadog</span><span class="tag">Splunk</span><span class="tag">SLOs</span></div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-header"><div class="skill-icon">🔒</div><div class="skill-card-title">DevSecOps</div></div>
+      <div class="skill-tags"><span class="tag">Trivy</span><span class="tag">Snyk</span><span class="tag">Checkov</span><span class="tag">OPA/Gatekeeper</span><span class="tag">Vault</span><span class="tag">Defender for Cloud</span></div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-header"><div class="skill-icon">🖥️</div><div class="skill-card-title">Scripting & Development</div></div>
+      <div class="skill-tags"><span class="tag">Python</span><span class="tag">Bash</span><span class="tag">PowerShell</span><span class="tag">Go (basic)</span><span class="tag">REST APIs</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-eyebrow fade-in">
+    <div class="eyebrow-line"></div>
+    <span class="section-eyebrow-text">03 · Experience</span>
+  </div>
+  <div class="section-title fade-in">12 years.<br>One consistent thread.</div>
+  <div class="timeline">
+
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-top">
+          <div class="timeline-role">Lead DevOps / Platform Engineer</div>
+          <div class="timeline-meta">Sep 2023 – Present</div>
+        </div>
+        <div class="timeline-company">S&P Global · Hyderabad, India</div>
+        <div class="timeline-desc">Building and operating enterprise Kubernetes platforms, AI/ML infrastructure, and GitOps delivery models. Owns GPU clusters for model inference, RAG pipelines for enterprise AI, and the IaC blueprints that product teams depend on. Led CI/CD modernisation, embedded DevSecOps controls, and maintained 99.9% platform uptime through SRE practices.</div>
+        <div class="skill-tags"><span class="tag">AKS</span><span class="tag">EKS</span><span class="tag">ArgoCD</span><span class="tag">Terraform</span><span class="tag">GPU Kubernetes</span><span class="tag">RAG</span><span class="tag">GitHub Actions</span><span class="tag">Datadog</span></div>
+      </div>
+    </div>
+
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot muted"></div>
+      <div class="timeline-card">
+        <div class="timeline-top">
+          <div class="timeline-role">Senior DevOps Engineer</div>
+          <div class="timeline-meta">Feb 2023 – Aug 2023</div>
+        </div>
+        <div class="timeline-company">Capgemini · European Central Bank (ECB) · Wroclaw, Poland (On-site)</div>
+        <div class="timeline-desc">On-site contract engagement at the European Central Bank — managing production Kubernetes clusters, delivering zero-downtime deployments with blue-green and canary strategies, and building proactive observability with Prometheus and Grafana.</div>
+        <div class="skill-tags"><span class="tag">Kubernetes</span><span class="tag">GitLab CI</span><span class="tag">Ansible</span><span class="tag">Prometheus</span><span class="tag">Grafana</span></div>
+      </div>
+    </div>
+
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot muted"></div>
+      <div class="timeline-card">
+        <div class="timeline-top">
+          <div class="timeline-role">Senior Cloud Engineer</div>
+          <div class="timeline-meta">Jan 2021 – Jan 2023</div>
+        </div>
+        <div class="timeline-company">S&P Global · Hyderabad, India</div>
+        <div class="timeline-desc">Led Azure cloud automation across CAF-aligned Landing Zones. Built and governed AKS platforms, designed Hub-Spoke networking with Firewall and WAF, deployed Azure Databricks for enterprise data processing, and hardened security posture with Azure Policy and Defender for Cloud.</div>
+        <div class="skill-tags"><span class="tag">Azure</span><span class="tag">AKS</span><span class="tag">Terraform</span><span class="tag">Bicep</span><span class="tag">Databricks</span><span class="tag">Azure Monitor</span></div>
+      </div>
+    </div>
+
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot muted"></div>
+      <div class="timeline-card">
+        <div class="timeline-top">
+          <div class="timeline-role">Azure Migration Engineer</div>
+          <div class="timeline-meta">Jun 2020 – Jan 2021</div>
+        </div>
+        <div class="timeline-company">Neudesic · AT&T Project · Hyderabad, India</div>
+        <div class="timeline-desc">Led AT&T's on-premises to Azure migration for mission-critical systems with near-zero downtime. Designed CAF-aligned Landing Zones, built secure hybrid connectivity via ExpressRoute, and implemented BCDR with Azure Site Recovery.</div>
+        <div class="skill-tags"><span class="tag">Azure Migrate</span><span class="tag">ExpressRoute</span><span class="tag">ASR</span><span class="tag">Landing Zones</span></div>
+      </div>
+    </div>
+
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot muted"></div>
+      <div class="timeline-card">
+        <div class="timeline-top">
+          <div class="timeline-role">Azure Cloud Engineer</div>
+          <div class="timeline-meta">Jun 2018 – Jun 2020</div>
+        </div>
+        <div class="timeline-company">Mercedes-Benz R&D India · adVANce Programme · Bangalore, India</div>
+        <div class="timeline-desc">Managed enterprise Azure identity, RBAC, and subscription governance for global R&D teams. Automated secret rotation and IaC deployments via Azure Pipelines using ARM templates.</div>
+        <div class="skill-tags"><span class="tag">Azure AD</span><span class="tag">RBAC</span><span class="tag">ARM</span><span class="tag">Azure Pipelines</span><span class="tag">Key Vault</span></div>
+      </div>
+    </div>
+
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot muted"></div>
+      <div class="timeline-card">
+        <div class="timeline-top">
+          <div class="timeline-role">Systems Administrator</div>
+          <div class="timeline-meta">Feb 2014 – Jun 2018</div>
+        </div>
+        <div class="timeline-company">Sonata Software · Hyderabad, India</div>
+        <div class="timeline-desc">Built foundational expertise in Windows and Linux infrastructure, device lifecycle management, and enterprise IT operations — the base from which a cloud engineering career grew.</div>
+        <div class="skill-tags"><span class="tag">Windows</span><span class="tag">Linux</span><span class="tag">IT Operations</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-eyebrow fade-in">
+    <div class="eyebrow-line"></div>
+    <span class="section-eyebrow-text">04 · Certifications</span>
+  </div>
+  <div class="section-title fade-in">9 certifications.<br>Across 3 clouds.</div>
+  <div class="certs-grid">
+    <div class="cert-card fade-in"><div class="cert-badge">🏆</div><div><div class="cert-name">Certified Kubernetes Administrator</div><div class="cert-id">CKA · CNCF</div></div></div>
+    <div class="cert-card fade-in"><div class="cert-badge">🔷</div><div><div class="cert-name">Azure Solutions Architect Expert</div><div class="cert-id">AZ-305 · Microsoft</div></div></div>
+    <div class="cert-card fade-in"><div class="cert-badge">🔷</div><div><div class="cert-name">DevOps Engineer Expert</div><div class="cert-id">AZ-400 · Microsoft</div></div></div>
+    <div class="cert-card fade-in"><div class="cert-badge">🔷</div><div><div class="cert-name">Azure Administrator Associate</div><div class="cert-id">AZ-104 · Microsoft</div></div></div>
+    <div class="cert-card fade-in"><div class="cert-badge">🟠</div><div><div class="cert-name">Solutions Architect – Associate</div><div class="cert-id">SAA-C03 · AWS</div></div></div>
+    <div class="cert-card fade-in"><div class="cert-badge">🟠</div><div><div class="cert-name">Cloud Practitioner</div><div class="cert-id">CLF · AWS</div></div></div>
+    <div class="cert-card fade-in"><div class="cert-badge">⬛</div><div><div class="cert-name">Terraform Associate</div><div class="cert-id">003 · HashiCorp</div></div></div>
+    <div class="cert-card fade-in"><div class="cert-badge">🟢</div><div><div class="cert-name">Associate Cloud Engineer</div><div class="cert-id">ACE · Google Cloud</div></div></div>
+    <div class="cert-card fade-in"><div class="cert-badge">📋</div><div><div class="cert-name">SAFe® 5 Product Owner/PM</div><div class="cert-id">Scaled Agile</div></div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="contact-eyebrow">05 · Contact</div>
+    <div class="contact-title fade-in">Let's build<br>something together.</div>
+    <p class="contact-subtitle fade-in">Open to senior Platform Engineering, DevOps, and AI Infrastructure roles.<br>Actively exploring opportunities globally and in the Middle East.</p>
+    <div class="contact-links fade-in">
+      <a href="https://linkedin.com/in/ramakrishna-aruva" target="_blank" class="contact-link">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        linkedin.com/in/ramakrishna-aruva
+      </a>
+      <a href="mailto:aruvaramakrishna@gmail.com" class="contact-link">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        aruvaramakrishna@gmail.com
+      </a>
+      <a href="tel:+919154150171" class="contact-link">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        +91 9154150171
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 Ramakrishna Aruva · Built with HTML/CSS · Hosted on GitHub Pages
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
